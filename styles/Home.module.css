@@ -1,5 +1,26 @@
 .container {
   padding: 0 2rem;
+  display: flex;
+  width: 80%;
+  margin: 0px auto;
+  height: 100vh;
+}
+.swaggerJsonWrap {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex: 1;
+}
+.optBtnWrap {
+  width: 100px;
+  align-self: center;
+  text-align: center;
+}
+.optBtn {
+  width: 80px;
+  cursor: pointer;
+}
+.tsCodeWrap {
+  border: 1px solid green;
+  flex: 1;
 }
 
 .main {
