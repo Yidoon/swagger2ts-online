@@ -14,7 +14,6 @@ const Home: NextPage = () => {
     reviceRef.current = editor;
   };
   const transer = async () => {
-    console.log(editorRef.current.getValue());
     const res = await fetch("/api/transfer", {
       method: "POST",
       headers: {

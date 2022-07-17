@@ -1,7 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-const { default: dtsgenerator, parseSchema } = require("dtsgenerator");
-import fs from "fs";
 import openapiTS from "openapi-typescript";
 
 type Data = {

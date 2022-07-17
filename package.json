@@ -9,16 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^34.2.0",
-    "@ckeditor/ckeditor5-react": "^5.0.2",
     "@monaco-editor/react": "^4.4.5",
     "monaco-editor": "^0.33.0",
     "next": "12.2.2",
-    "next-transpile-modules": "^9.0.0",
     "react": "18.2.0",
-    "react-codejar": "^1.1.2",
-    "react-dom": "18.2.0",
-    "react-monaco-editor": "^0.49.0"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.0.3",
@@ -26,10 +21,8 @@
     "@types/react-dom": "18.0.6",
     "eslint": "8.19.0",
     "eslint-config-next": "12.2.2",
-    "file-loader": "^6.2.0",
     "monaco-editor-webpack-plugin": "^7.0.1",
     "openapi-typescript": "^5.4.1",
-    "ttf-loader": "^1.0.2",
     "typescript": "4.7.4"
   }
 }
