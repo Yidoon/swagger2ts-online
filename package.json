@@ -12,22 +12,15 @@
     "@ckeditor/ckeditor5-build-classic": "^34.2.0",
     "@ckeditor/ckeditor5-react": "^5.0.2",
     "@monaco-editor/react": "^4.4.5",
-    "@uiw/react-monacoeditor": "^3.5.4",
-    "@zeit/next-css": "^1.0.1",
-    "codejar": "^3.6.0",
-    "draft-js": "^0.11.7",
-    "dtsgenerator": "^3.16.0",
     "monaco-editor": "^0.33.0",
     "next": "12.2.2",
     "next-transpile-modules": "^9.0.0",
     "react": "18.2.0",
     "react-codejar": "^1.1.2",
     "react-dom": "18.2.0",
-    "react-monaco-editor": "^0.49.0",
-    "react-rte": "^0.16.5"
+    "react-monaco-editor": "^0.49.0"
   },
   "devDependencies": {
-    "@types/draft-js": "^0.11.9",
     "@types/node": "18.0.3",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",

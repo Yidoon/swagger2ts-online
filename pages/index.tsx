@@ -1,9 +1,6 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import { useRef, useState } from "react";
 import styles from "../styles/Home.module.css";
-import RichEditor from "./components/RichEditor";
 import Editor, { Monaco } from "@monaco-editor/react";
 
 const Home: NextPage = () => {
@@ -26,16 +23,15 @@ const Home: NextPage = () => {
       body: JSON.stringify({ swaggerJsonStr: editorRef.current.getValue() }),
     }).then((res) => res.json());
     setTransferValue(res.data);
-    console.log(res.data, "ress");
   };
   return (
     <div className={styles.container}>
       <div className={styles.swaggerJsonWrap}>
         <Editor
           height="100vh"
-          defaultLanguage="javascript"
-          defaultValue="// some comment"
+          defaultLanguage="json"
           onMount={handleEditorDidMount}
+          language="json"
         />
       </div>
       <div className={styles.optBtnWrap}>
@@ -46,10 +42,10 @@ const Home: NextPage = () => {
       <div className={styles.tsCodeWrap}>
         <Editor
           height="100vh"
-          defaultLanguage="javascript"
-          defaultValue="// some comment"
+          defaultLanguage="typescript"
           onMount={handleReciveEditorDidMount}
           value={transerValue}
+          language="typescript"
         />
       </div>
     </div>
