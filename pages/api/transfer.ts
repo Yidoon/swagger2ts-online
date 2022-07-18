@@ -261,6 +261,6 @@ export default async function handler(
       },
     },
   };
-  const output = await openapiTS(jsonObj);
-  res.status(200).json({ data: output });
+  const output = await openapiTS(jsonObj as any);
+  res.status(200).json({ data: output } as any);
 }
