@@ -3,6 +3,7 @@ const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  outputFileTracing: false,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.plugins.push(new MonacoWebpackPlugin());
     // config.rules.loaders
