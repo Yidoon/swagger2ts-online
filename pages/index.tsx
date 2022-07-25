@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import styles from "../styles/Home.module.css";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { Input, Tabs } from "antd";
@@ -77,7 +77,7 @@ const Home: NextPage = () => {
   const handleDoubleClick = (key: number) => {
     setEditKey(key);
   };
-  const handleNameChange = (e) => {
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPanes(
       produce((draft) => {
         draft[editKey!].name = e.target.value;
