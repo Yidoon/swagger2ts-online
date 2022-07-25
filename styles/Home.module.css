@@ -1,25 +1,31 @@
 .container {
-  padding: 0 2rem;
-  display: flex;
-  width: 80%;
+  padding: 36px;
+  /* display: flex; */
+  /* width: 80%; */
   margin: 0px auto;
   height: 100vh;
+  overflow: hidden;
+}
+.editorWrap {
+  display: flex;
 }
 .swaggerJsonWrap {
+  height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.15);
   flex: 1;
 }
 .optBtnWrap {
-  width: 100px;
+  width: 180px;
   align-self: center;
   text-align: center;
 }
 .optBtn {
-  width: 80px;
+  width: 120px;
   cursor: pointer;
 }
 .tsCodeWrap {
-  border: 1px solid green;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
   flex: 1;
 }
 
