@@ -5,6 +5,7 @@ import Editor, { Monaco } from "@monaco-editor/react";
 import { Input, Tabs } from "antd";
 import { EditorPanItem } from "../types";
 import produce from "immer";
+import LinkToGithub from "./components/LinkToGithub";
 
 const { TabPane } = Tabs;
 
@@ -86,85 +87,90 @@ const Home: NextPage = () => {
   };
   return (
     <div className={styles.container}>
-      <Tabs
-        onChange={onChange}
-        onEdit={onEdit}
-        activeKey={activeKey}
-        tabPosition="left"
-        type="editable-card"
-      >
-        {panes.map((item, index) => {
-          const renderTabEl = () => {
-            const tabName = item.name;
-            const normalText = (
-              <span
-                style={{
-                  maxWidth: 180,
-                  textOverflow: "ellipsis",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                  display: "inline-block",
-                }}
-              >
-                {tabName}
-              </span>
-            );
-            const editInput = (
-              <Input
-                onChange={handleNameChange}
-                value={tabName}
-                onPressEnter={() => {
-                  setEditKey(undefined);
-                }}
-                autoFocus
-                onBlur={() => {
-                  setEditKey(undefined);
-                }}
-              />
-            );
+      <div className={styles.header}>
+        <LinkToGithub />
+      </div>
+      <div className={styles.content}>
+        <Tabs
+          onChange={onChange}
+          onEdit={onEdit}
+          activeKey={activeKey}
+          tabPosition="left"
+          type="editable-card"
+        >
+          {panes.map((item, index) => {
+            const renderTabEl = () => {
+              const tabName = item.name;
+              const normalText = (
+                <span
+                  style={{
+                    maxWidth: 180,
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    display: "inline-block",
+                  }}
+                >
+                  {tabName}
+                </span>
+              );
+              const editInput = (
+                <Input
+                  onChange={handleNameChange}
+                  value={tabName}
+                  onPressEnter={() => {
+                    setEditKey(undefined);
+                  }}
+                  autoFocus
+                  onBlur={() => {
+                    setEditKey(undefined);
+                  }}
+                />
+              );
+              return (
+                <div
+                  style={{ width: "200px" }}
+                  onDoubleClick={() => {
+                    handleDoubleClick(index);
+                  }}
+                >
+                  {editKey === index ? editInput : normalText}
+                </div>
+              );
+            };
             return (
-              <div
-                style={{ width: "200px" }}
-                onDoubleClick={() => {
-                  handleDoubleClick(index);
-                }}
-              >
-                {editKey === index ? editInput : normalText}
-              </div>
+              <TabPane tab={renderTabEl()} key={index}>
+                <div className={styles.editorWrap}>
+                  <div className={styles.swaggerJsonWrap}>
+                    <Editor
+                      height="calc(100vh - 72px)"
+                      defaultLanguage="json"
+                      onMount={handleEditorDidMount}
+                      value={item.swaggerStr}
+                      language="json"
+                      onChange={handleSwaggerEditorChange}
+                    />
+                  </div>
+                  <div className={styles.optBtnWrap}>
+                    <button onClick={transfer} className={styles.optBtn}>
+                      转换成 TS
+                    </button>
+                  </div>
+                  <div className={styles.tsCodeWrap}>
+                    <Editor
+                      height="calc(100vh - 72px)"
+                      defaultLanguage="typescript"
+                      onMount={handleReciveEditorDidMount}
+                      value={item.tsStr}
+                      language="typescript"
+                    />
+                  </div>
+                </div>
+              </TabPane>
             );
-          };
-          return (
-            <TabPane tab={renderTabEl()} key={index}>
-              <div className={styles.editorWrap}>
-                <div className={styles.swaggerJsonWrap}>
-                  <Editor
-                    height="calc(100vh - 72px)"
-                    defaultLanguage="json"
-                    onMount={handleEditorDidMount}
-                    value={item.swaggerStr}
-                    language="json"
-                    onChange={handleSwaggerEditorChange}
-                  />
-                </div>
-                <div className={styles.optBtnWrap}>
-                  <button onClick={transfer} className={styles.optBtn}>
-                    转换成 TS
-                  </button>
-                </div>
-                <div className={styles.tsCodeWrap}>
-                  <Editor
-                    height="calc(100vh - 72px)"
-                    defaultLanguage="typescript"
-                    onMount={handleReciveEditorDidMount}
-                    value={item.tsStr}
-                    language="typescript"
-                  />
-                </div>
-              </div>
-            </TabPane>
-          );
-        })}
-      </Tabs>
+          })}
+        </Tabs>
+      </div>
     </div>
   );
 };
