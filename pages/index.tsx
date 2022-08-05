@@ -2,18 +2,12 @@ import type { NextPage } from "next";
 import { ChangeEvent, useRef, useState } from "react";
 import styles from "../styles/Home.module.css";
 import Editor, { Monaco } from "@monaco-editor/react";
-import { Input, Tabs } from "antd";
+import { Input, message, Spin, Tabs } from "antd";
 import { EditorPanItem } from "../types";
 import produce from "immer";
 import LinkToGithub from "./components/LinkToGithub";
 
 const { TabPane } = Tabs;
-
-const DefaultPan = {
-  name: "",
-  swaggerStr: "",
-  tsStr: "",
-};
 const genTempPanItem = (name: string) => {
   return {
     name: name,
@@ -27,6 +21,7 @@ const Home: NextPage = () => {
   const [panes, setPanes] = useState<EditorPanItem[]>([genTempPanItem("默认")]);
   const [activeKey, setActiveKey] = useState<string>("0");
   const [editKey, setEditKey] = useState<number | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleEditorDidMount = (editor: any, monaco: Monaco) => {
     editorRef.current = editor;
@@ -44,6 +39,7 @@ const Home: NextPage = () => {
   };
 
   const transfer = async () => {
+    setLoading(true);
     const res = await fetch("/api/transfer", {
       method: "POST",
       headers: {
@@ -51,11 +47,16 @@ const Home: NextPage = () => {
       },
       body: JSON.stringify({ swaggerJsonStr: editorRef.current.getValue() }),
     }).then((res) => res.json());
-    setPanes(
-      produce((draft) => {
-        draft[+activeKey].tsStr = res.data;
-      })
-    );
+    if (res.code !== 200) {
+      message.error(res.msg);
+    } else {
+      setPanes(
+        produce((draft) => {
+          draft[+activeKey].tsStr = res.data;
+        })
+      );
+    }
+    setLoading(false);
   };
   const onChange = (key: string) => {
     setActiveKey(key);
@@ -157,13 +158,15 @@ const Home: NextPage = () => {
                     </button>
                   </div>
                   <div className={styles.tsCodeWrap}>
-                    <Editor
-                      height="calc(100vh - 72px)"
-                      defaultLanguage="typescript"
-                      onMount={handleReciveEditorDidMount}
-                      value={item.tsStr}
-                      language="typescript"
-                    />
+                    <Spin spinning={loading}>
+                      <Editor
+                        height="calc(100vh - 72px)"
+                        defaultLanguage="typescript"
+                        onMount={handleReciveEditorDidMount}
+                        value={item.tsStr}
+                        language="typescript"
+                      />
+                    </Spin>
                   </div>
                 </div>
               </TabPane>

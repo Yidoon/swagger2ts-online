@@ -1,26 +1,18 @@
 import React from "react";
-import Image from "next/image";
 
 const LinkToGithub = () => {
   return (
-    <div
+    <a
+      href="https://github.com/Yidoon/swagger2ts-online"
       style={{
         position: "absolute",
         top: 12,
         right: 12,
         textDecoration: "underline",
-        cursor: "pointer",
       }}
     >
       Github
-      {/* <Image
-        src="/github.svg"
-        alt=""
-        width={24}
-        height={24}
-        style={{ cursor: "pointer" }}
-      /> */}
-    </div>
+    </a>
   );
 };
 
